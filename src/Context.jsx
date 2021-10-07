@@ -3,6 +3,7 @@ import { createContext, useContext } from "react";
 export const DEFAULT = {
   API_BASE_URL: "https://api.github.com/users/",
   USERNAME: "Octocat",
+  // USERNAME: "namanavasthi",
   ERROR: "No results",
   NOT_FOUND: "Not Available",
   CONTEXT: {
@@ -19,8 +20,11 @@ export const DEFAULT = {
     blog: "",
     company: "",
   },
-  THEME: "media",
+  THEME: "",
 };
 
 export const Context = createContext(DEFAULT.CONTEXT);
 export const useAppContext = () => useContext(Context);
+
+export const ThemeContext = createContext({ theme: DEFAULT.THEME, updateTheme: () => {} });
+export const useThemeContext = () => useContext(ThemeContext);

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-import { DEFAULT, Context } from "./Context";
+import { DEFAULT, Context, ThemeContext } from "./Context";
+import { Header } from "./Header";
+import { Main } from "./Main";
+import { Wrapper } from "./Wrapper";
 
 const getProfile = async (username = DEFAULT.USERNAME) => {
   const response = await fetch(`${DEFAULT.API_BASE_URL}${username}`);
@@ -8,8 +11,37 @@ const getProfile = async (username = DEFAULT.USERNAME) => {
   return result;
 };
 
+const getTheme = () => {
+  if (
+    localStorage.theme === "dark" ||
+    (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
+  ) {
+    document.documentElement.classList.add("dark");
+    return "dark";
+  } else {
+    document.documentElement.classList.remove("dark");
+    return "light";
+  }
+};
+
 const App = () => {
   const [data, setData] = useState(DEFAULT.CONTEXT);
+
+  const [theme, setTheme] = useState(getTheme());
+
+  const updateTheme = () => {
+    if (theme === "dark") {
+      localStorage.theme = "light";
+      document.documentElement.classList.remove("dark");
+
+      setTheme("light");
+    } else {
+      localStorage.theme = "dark";
+      document.documentElement.classList.add("dark");
+
+      setTheme("dark");
+    }
+  };
 
   useEffect(() => {
     getProfile()
@@ -48,12 +80,17 @@ const App = () => {
   }, []);
 
   return (
-    <div className="App flex justify-center">
-      <Context.Provider value={{ data }}>
-        <h1 className="text-blue-600 text-4xl">Hello to Frontend Mentor Bootstrap</h1>
-        {data.name}
-      </Context.Provider>
-    </div>
+    <ThemeContext.Provider value={{ theme, updateTheme }}>
+      {console.log(data)}
+      <div className={`App flex justify-center items-center font-space bg-primary-500 dark:bg-primary-700`}>
+        <Context.Provider value={{ data }}>
+          <Wrapper>
+            <Header />
+            <Main />
+          </Wrapper>
+        </Context.Provider>
+      </div>
+    </ThemeContext.Provider>
   );
 };
 
