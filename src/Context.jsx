@@ -7,6 +7,7 @@ export const DEFAULT = {
   ERROR: "No results",
   NOT_FOUND: "Not Available",
   CONTEXT: {
+    error: 0,
     avatar_url: "",
     name: "",
     created_at: "",
@@ -21,6 +22,7 @@ export const DEFAULT = {
     company: "",
   },
   THEME: "",
+  QUERY: "",
 };
 
 export const Context = createContext(DEFAULT.CONTEXT);
@@ -28,3 +30,11 @@ export const useAppContext = () => useContext(Context);
 
 export const ThemeContext = createContext({ theme: DEFAULT.THEME, updateTheme: () => {} });
 export const useThemeContext = () => useContext(ThemeContext);
+
+export const QueryContext = createContext({
+  query: DEFAULT.QUERY,
+  setQuery: () => {},
+  error: false,
+  setError: () => {},
+});
+export const useQueryContext = () => useContext(QueryContext);

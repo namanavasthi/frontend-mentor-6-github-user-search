@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { DEFAULT, Context, ThemeContext } from "./Context";
+import { DEFAULT, Context, ThemeContext, QueryContext } from "./Context";
 import { Header } from "./Header";
 import { Main } from "./Main";
 import { Wrapper } from "./Wrapper";
@@ -29,6 +29,8 @@ const App = () => {
 
   const [theme, setTheme] = useState(getTheme());
 
+  const [query, setQuery] = useState({ query: DEFAULT.QUERY, error: false });
+
   const updateTheme = () => {
     if (theme === "dark") {
       localStorage.theme = "light";
@@ -42,6 +44,44 @@ const App = () => {
       setTheme("dark");
     }
   };
+
+  useEffect(() => {
+    if (query.query !== DEFAULT.QUERY) {
+      getProfile(query.query)
+        .then((res) => {
+          setData(
+            (({
+              avatar_url,
+              name,
+              created_at,
+              login,
+              bio,
+              public_repos,
+              followers,
+              following,
+              location,
+              twitter_username,
+              blog,
+              company,
+            }) => ({
+              avatar_url,
+              name,
+              created_at,
+              login,
+              bio,
+              public_repos,
+              followers,
+              following,
+              location,
+              twitter_username,
+              blog,
+              company,
+            }))(res)
+          );
+        })
+        .catch(() => setQuery({ query: query, error: true }));
+    }
+  }, [query]);
 
   useEffect(() => {
     getProfile()
@@ -81,13 +121,14 @@ const App = () => {
 
   return (
     <ThemeContext.Provider value={{ theme, updateTheme }}>
-      {console.log(data)}
       <div className={`App flex justify-center items-center font-space bg-primary-500 dark:bg-primary-700`}>
         <Context.Provider value={{ data }}>
-          <Wrapper>
-            <Header />
-            <Main />
-          </Wrapper>
+          <QueryContext.Provider value={{ query, setQuery }}>
+            <Wrapper>
+              <Header />
+              <Main />
+            </Wrapper>
+          </QueryContext.Provider>
         </Context.Provider>
       </div>
     </ThemeContext.Provider>

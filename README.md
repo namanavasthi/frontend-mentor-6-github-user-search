@@ -40,8 +40,7 @@ The GitHub users API endpoint is `https://api.github.com/users/:username`. So, i
 
 ## PLAN
 
-- start with api call for `octocat`
-- work on layout
+- work on search ui
 - work on theme
-- work on what info to show exactly and edge cases
-- work on hover states and disable states
+- work on edge cases for ui
+- work on interactive states

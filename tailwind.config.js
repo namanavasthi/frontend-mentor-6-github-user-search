@@ -27,7 +27,7 @@ module.exports = {
         33: "33px",
         38: "38px",
       },
-      letterSpacing: { 0: "0px" },
+      letterSpacing: { 0: "0px", 2.5: "2.5px" },
       colors: {
         primary: {
           100: "#0079ff",

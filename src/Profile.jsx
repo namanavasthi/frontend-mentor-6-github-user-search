@@ -119,28 +119,35 @@ export const Profile = () => {
   };
 
   return (
-    <section className="w-full flex flex-col shadow-lg rounded-xl bg-white dark:bg-primary-800">
-      <div className="flex flex-row p-5 md:p-10 md:pb-6">
-        <div className="w-3/12 mr-5 md:w-1/3 md:mr-0 md:pr-8">
-          <img src={avatar_url} alt="avatar" className="w-full rounded-full shadow-md" />
-        </div>
-        <div className="w-3/4 md:w-2/3 flex flex-col justify-center">
-          <h2 className="font-space text-16 leading-24 tracking-0 md:text-26 md:leading-38 font-bold text-primary-400">
-            {name}
-          </h2>
-          <h3 className="pb-2 font-space text-13 leading-20 tracking-0 md:text-16 md:leading-24 font-regular text-primary-100">{`@${login}`}</h3>
-          <h4 className="font-space text-13 leading-20 tracking-0 md:text-15 md:leading-22 font-regular text-primary-200">{`Joined ${getDate(
-            created_at
-          )}`}</h4>
-        </div>
+    <section className="w-full flex flex-col lg:flex-row lg:items-start shadow-lg rounded-xl bg-white dark:bg-primary-800">
+      <div className="hidden lg:flex w-1/4 pt-10 pl-10">
+        <img src={avatar_url} alt="avatar" className="w-full rounded-full shadow-md" />
       </div>
-      <Bio bio={bio} className="p-5 md:px-10 md:py-0" />
-      <ul className="flex flex-row justify-center rounded-xl p-5 bg-primary-500 m-5 md:mx-10 md:my-6">
-        <ListItem text="repos" value={public_repos} />
-        <ListItem text="followers" value={followers} />
-        <ListItem text="following" value={following} />
-      </ul>
-      <Socials className="p-5 md:p-10 md:pt-4" />
+      <div className="w-full lg:w-3/4">
+        <div className="flex flex-row p-5 md:p-10 md:pb-6 lg:pb-3">
+          <div className="w-3/12 mr-5 md:w-1/3 md:mr-0 md:pr-8 lg:hidden">
+            <img src={avatar_url} alt="avatar" className="w-full rounded-full shadow-md" />
+          </div>
+          <div className="w-3/4 md:w-2/3 lg:w-full flex flex-col lg:flex-row justify-center">
+            <div className="w-full lg:w-1/2">
+              <h2 className="font-space text-16 leading-24 tracking-0 md:text-26 md:leading-38 font-bold text-primary-400">
+                {name}
+              </h2>
+              <h3 className="pb-2 font-space text-13 leading-20 tracking-0 md:text-16 md:leading-24 font-regular text-primary-100">{`@${login}`}</h3>
+            </div>
+            <h4 className="w-full lg:w-1/2 lg:text-right lg:pt-2 font-space text-13 leading-20 tracking-0 md:text-15 md:leading-22 font-regular text-primary-200">{`Joined ${getDate(
+              created_at
+            )}`}</h4>
+          </div>
+        </div>
+        <Bio bio={bio} className="p-5 md:px-10 md:py-0 lg:" />
+        <ul className="flex flex-row justify-center rounded-xl p-5 bg-primary-500 m-5 md:mx-10 md:my-6 lg:p-3">
+          <ListItem text="repos" value={public_repos} />
+          <ListItem text="followers" value={followers} />
+          <ListItem text="following" value={following} />
+        </ul>
+        <Socials className="p-5 md:p-10 md:pt-4" />
+      </div>
     </section>
   );
 };
