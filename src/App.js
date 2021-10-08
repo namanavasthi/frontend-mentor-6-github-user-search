@@ -49,6 +49,12 @@ const App = () => {
     if (query.query !== DEFAULT.QUERY) {
       getProfile(query.query)
         .then((res) => {
+          // if a successful query but error on find
+          if (res.message) {
+            // setQuery({ query: query.query, error: true });
+            return;
+          }
+
           setData(
             (({
               avatar_url,
@@ -79,9 +85,9 @@ const App = () => {
             }))(res)
           );
         })
-        .catch(() => setQuery({ query: query, error: true }));
+        .catch(() => setQuery({ query: query.query, error: true }));
     }
-  }, [query]);
+  }, [query.query]);
 
   useEffect(() => {
     getProfile()

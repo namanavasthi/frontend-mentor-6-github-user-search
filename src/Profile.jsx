@@ -60,7 +60,7 @@ const Bio = ({ bio, className }) => {
   if (bio === "" || bio === undefined || bio === null) bio = "This profile has no bio";
   return (
     <p
-      className={`text-13 font-regular leading-25 tracking-0 md:text-15 md:leading-25 text-primary-300 text-opacity-75 ${className} py-6`}
+      className={`text-13 font-regular leading-25 tracking-0 md:text-15 md:leading-25 text-primary-300 text-opacity-75 ${className}`}
     >
       {bio}
     </p>
@@ -140,7 +140,7 @@ export const Profile = () => {
             )}`}</h4>
           </div>
         </div>
-        <Bio bio={bio} className="p-5 md:px-10 md:py-0 lg:" />
+        <Bio bio={bio} className="px-5 md:px-10 md:py-0" />
         <ul className="flex flex-row justify-center rounded-xl p-5 bg-primary-500 m-5 md:mx-10 md:my-6 lg:p-3">
           <ListItem text="repos" value={public_repos} />
           <ListItem text="followers" value={followers} />

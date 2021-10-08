@@ -14,8 +14,10 @@ module.exports = {
         13: "13px",
         15: "15px",
         16: "16px",
+        18: "18px",
         20: "20px",
         22: "22px",
+        24: "24px",
         26: "26px",
       },
       lineHeight: {
