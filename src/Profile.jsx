@@ -14,9 +14,13 @@ const getDate = (iso_date) => {
 
 const ListItem = ({ text, value }) => {
   return (
-    <li className="flex flex-col justify-center items-center px-4">
-      <p className="capitalize pb-2 font-space text-11 leading-16 tracking-0 font-regular text-primary-300">{text}</p>
-      <h5 className="font-space text-16 leading-24 tracking-0 font-bold text-primary-400">{value}</h5>
+    <li className="flex flex-col justify-center items-center md:items-start px-4 md:w-1/3">
+      <p className="capitalize pb-2 font-space text-11 leading-16 tracking-0 md:text-13 md:leading-20 font-regular text-primary-300">
+        {text}
+      </p>
+      <h5 className="font-space text-16 leading-24 tracking-0 md:text-22 md:leading-33 font-bold text-primary-400">
+        {value}
+      </h5>
     </li>
   );
 };
@@ -52,6 +56,17 @@ const ItemLink = ({ Icon, text, link }) => {
   );
 };
 
+const Bio = ({ bio, className }) => {
+  if (bio === "" || bio === undefined || bio === null) bio = "This profile has no bio";
+  return (
+    <p
+      className={`text-13 font-regular leading-25 tracking-0 md:text-15 md:leading-25 text-primary-300 text-opacity-75 ${className} py-6`}
+    >
+      {bio}
+    </p>
+  );
+};
+
 export const Profile = () => {
   const { data } = useAppContext();
 
@@ -70,54 +85,62 @@ export const Profile = () => {
     company,
   } = data;
 
-  const Socials = () => {
+  const Socials = ({ className }) => {
     return (
-      <ul className="flex flex-col py-6 w-full items-start font-space text-13 leading-20 tracking-0 font-regular text-primary-300">
-        <Item className={`mb-4 ${location ? "" : "opacity-50"}`}>
-          {location ? <ItemText Icon={MdLocationOn} text={location} /> : <NotAvailable Icon={MdLocationOn} />}
-        </Item>
-        <Item className={`mb-4 ${blog ? "" : "opacity-50"}`}>
-          {blog ? <ItemLink Icon={ImLink} text={blog} link={blog} /> : <NotAvailable Icon={ImLink} />}
-        </Item>
-        <Item className={`mb-4 ${twitter_username ? "" : "opacity-50"}`}>
-          {twitter_username ? (
-            <ItemLink Icon={ImTwitter} text={twitter_username} link={`https://twitter.com/${twitter_username}`} />
-          ) : (
-            <NotAvailable Icon={ImTwitter} />
-          )}
-        </Item>
-        <Item className={`${company ? "" : "opacity-50"}`}>
-          {company ? (
-            <ItemLink Icon={FaBuilding} text={company} link={`https://github.com/${twitter_username}`} />
-          ) : (
-            <NotAvailable Icon={FaBuilding} />
-          )}
-        </Item>
+      <ul
+        className={`flex flex-col md:flex-row md:flex-wrap w-full items-start font-space text-13 leading-20 tracking-0 md:text-15 md:leading-22 font-regular text-primary-300 ${className} py-6`}
+      >
+        <div className="md:w-1/2">
+          <Item className={`mb-4 ${location ? "" : "opacity-50"}`}>
+            {location ? <ItemText Icon={MdLocationOn} text={location} /> : <NotAvailable Icon={MdLocationOn} />}
+          </Item>
+          <Item className={`mb-4 ${blog ? "" : "opacity-50"}`}>
+            {blog ? <ItemLink Icon={ImLink} text={blog} link={blog} /> : <NotAvailable Icon={ImLink} />}
+          </Item>
+        </div>
+        <div className="md:w-1/2">
+          <Item className={`mb-4 ${twitter_username ? "" : "opacity-50"}`}>
+            {twitter_username ? (
+              <ItemLink Icon={ImTwitter} text={twitter_username} link={`https://twitter.com/${twitter_username}`} />
+            ) : (
+              <NotAvailable Icon={ImTwitter} />
+            )}
+          </Item>
+          <Item className={`${company ? "" : "opacity-50"}`}>
+            {company ? (
+              <ItemLink Icon={FaBuilding} text={company} link={`https://github.com/${twitter_username}`} />
+            ) : (
+              <NotAvailable Icon={FaBuilding} />
+            )}
+          </Item>
+        </div>
       </ul>
     );
   };
 
   return (
-    <section className="flex flex-col p-5 shadow-lg rounded-xl bg-white dark:bg-primary-800">
-      <div className="flex flex-row">
-        <div className="w-3/12 mr-5">
+    <section className="w-full flex flex-col shadow-lg rounded-xl bg-white dark:bg-primary-800">
+      <div className="flex flex-row p-5 md:p-10 md:pb-6">
+        <div className="w-3/12 mr-5 md:w-1/3 md:mr-0 md:pr-8">
           <img src={avatar_url} alt="avatar" className="w-full rounded-full shadow-md" />
         </div>
-        <div className="w-3/4">
-          <h2 className="font-space text-16 leading-24 tracking-0 font-bold text-primary-400">{name}</h2>
-          <h3 className="pb-2 font-space text-13 leading-20 tracking-0 font-regular text-primary-100">{`@${login}`}</h3>
-          <h4 className="font-space text-13 leading-20 tracking-0 font-regular text-primary-200">{`Joined ${getDate(
+        <div className="w-3/4 md:w-2/3 flex flex-col justify-center">
+          <h2 className="font-space text-16 leading-24 tracking-0 md:text-26 md:leading-38 font-bold text-primary-400">
+            {name}
+          </h2>
+          <h3 className="pb-2 font-space text-13 leading-20 tracking-0 md:text-16 md:leading-24 font-regular text-primary-100">{`@${login}`}</h3>
+          <h4 className="font-space text-13 leading-20 tracking-0 md:text-15 md:leading-22 font-regular text-primary-200">{`Joined ${getDate(
             created_at
           )}`}</h4>
         </div>
       </div>
-      <p className="py-6 text-13 font-regular leading-25 tracking-0 text-primary-300">{bio}</p>
-      <ul className="flex flex-row justify-center rounded-xl p-5 bg-primary-500">
+      <Bio bio={bio} className="p-5 md:px-10 md:py-0" />
+      <ul className="flex flex-row justify-center rounded-xl p-5 bg-primary-500 m-5 md:mx-10 md:my-6">
         <ListItem text="repos" value={public_repos} />
         <ListItem text="followers" value={followers} />
         <ListItem text="following" value={following} />
       </ul>
-      <Socials />
+      <Socials className="p-5 md:p-10 md:pt-4" />
     </section>
   );
 };
