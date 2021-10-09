@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/frontend-mentor-6-github-user-search/static/css/main.f4548f68.chunk.css",
+    "main.js": "/frontend-mentor-6-github-user-search/static/js/main.2b869ba6.chunk.js",
+    "main.js.map": "/frontend-mentor-6-github-user-search/static/js/main.2b869ba6.chunk.js.map",
+    "runtime-main.js": "/frontend-mentor-6-github-user-search/static/js/runtime-main.da1fcf38.js",
+    "runtime-main.js.map": "/frontend-mentor-6-github-user-search/static/js/runtime-main.da1fcf38.js.map",
+    "static/js/2.294a3350.chunk.js": "/frontend-mentor-6-github-user-search/static/js/2.294a3350.chunk.js",
+    "static/js/2.294a3350.chunk.js.map": "/frontend-mentor-6-github-user-search/static/js/2.294a3350.chunk.js.map",
+    "index.html": "/frontend-mentor-6-github-user-search/index.html",
+    "static/css/main.f4548f68.chunk.css.map": "/frontend-mentor-6-github-user-search/static/css/main.f4548f68.chunk.css.map",
+    "static/js/2.294a3350.chunk.js.LICENSE.txt": "/frontend-mentor-6-github-user-search/static/js/2.294a3350.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.da1fcf38.js",
+    "static/js/2.294a3350.chunk.js",
+    "static/css/main.f4548f68.chunk.css",
+    "static/js/main.2b869ba6.chunk.js"
+  ]
+}
