@@ -6,6 +6,7 @@ export const DEFAULT = {
   // USERNAME: "namanavasthi",
   ERROR: "No results",
   NOT_FOUND: "Not Available",
+  NO_BIO: "This profile has no bio",
   STATUS: "unloaded",
   CONTEXT: {
     error: 0,
