@@ -1,11 +1,11 @@
 # Frontend Mentor : Github User Search
 
 ```
-Name :
-Description :
-Difficulty :
-Status:
-Challenge :
+Name : GitHub user search app
+Description : In this project, you'll use the GitHub users API to pull profile data and display it. It's a great challenge if you're looking to practice working with a 3rd-party API.
+Difficulty : 2-JUNIOR
+Status: Complete
+Challenge : https://www.frontendmentor.io/challenges/github-user-search-app-Q09YOgaH6
 ```
 
 ## THOUGHTS
@@ -17,6 +17,9 @@ Challenge :
 - im going to use my own icons, don't @ me.
 
 > HOLD MY BEER, THAT WASN'T THE ONLY COLOR MISMATCH, THE WHOLE SKETCH FILE IS FULL OF INCONSISTENCIES :/
+
+- made a custom hook for the api call
+- added a local cache to not always call api if i already have data
 
 ## REQUIREMENTS
 
@@ -37,7 +40,3 @@ The GitHub users API endpoint is `https://api.github.com/users/:username`. So, i
 - If a GitHub user's bio is empty, show the text "This profile has no bio" with transparency added (as shown in the design). The lorem ipsum text in the designs shows how the bio should look when it is present.
 - If any of the location, website, twitter, or company properties are empty, show the text "Not Available" with transparency added (as shown in the design).
 - Website, twitter, and company information should all be links to those resaources. For the company link, it should remove the `@` symbol and link to the company page on GitHub. For Octocat, with `@github` being returned for the company, this would lead to a URL of `https://github.com/github`.
-
-## PLAN
-
-- work on interactive states

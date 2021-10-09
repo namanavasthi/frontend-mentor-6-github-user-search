@@ -49,7 +49,7 @@ const NotAvailable = ({ Icon }) => {
 
 const ItemLink = ({ Icon, text, link }) => {
   return (
-    <a className="flex flex-row justify-start items-center" href={link}>
+    <a className="flex flex-row justify-start items-center hover:underline focus:underline" href={link}>
       <Icon className="text-20" />
       <span className="pl-4">{text}</span>
     </a>
