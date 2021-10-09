@@ -6,6 +6,7 @@ export const DEFAULT = {
   // USERNAME: "namanavasthi",
   ERROR: "No results",
   NOT_FOUND: "Not Available",
+  STATUS: "unloaded",
   CONTEXT: {
     error: 0,
     avatar_url: "",
@@ -34,7 +35,6 @@ export const useThemeContext = () => useContext(ThemeContext);
 export const QueryContext = createContext({
   query: DEFAULT.QUERY,
   setQuery: () => {},
-  error: false,
-  setError: () => {},
+  status: DEFAULT.STATUS,
 });
 export const useQueryContext = () => useContext(QueryContext);

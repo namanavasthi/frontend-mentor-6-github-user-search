@@ -40,7 +40,6 @@ The GitHub users API endpoint is `https://api.github.com/users/:username`. So, i
 
 ## PLAN
 
-- work on search ui
 - work on theme
 - work on edge cases for ui
 - work on interactive states

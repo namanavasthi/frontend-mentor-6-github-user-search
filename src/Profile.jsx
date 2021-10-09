@@ -118,6 +118,16 @@ export const Profile = () => {
     );
   };
 
+  if (data && Object.keys(data).length === 0 && Object.getPrototypeOf(data) === Object.prototype) {
+    return (
+      <section className="w-full flex flex-col items-center justify-center shadow-lg rounded-xl bg-white dark:bg-primary-800">
+        <h2 className="p-5 text-13 font-regular leading-25 tracking-0 md:text-15 md:leading-25 text-primary-300 text-opacity-75">
+          error fetching user from hithub
+        </h2>
+      </section>
+    );
+  }
+
   return (
     <section className="w-full flex flex-col lg:flex-row lg:items-start shadow-lg rounded-xl bg-white dark:bg-primary-800">
       <div className="hidden lg:flex w-1/4 pt-10 pl-10">

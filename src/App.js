@@ -1,15 +1,9 @@
-import React, { useState, useEffect } from "react";
-
-import { DEFAULT, Context, ThemeContext, QueryContext } from "./Context";
+import React, { useState } from "react";
+import { Context, DEFAULT, QueryContext, ThemeContext } from "./Context";
 import { Header } from "./Header";
 import { Main } from "./Main";
+import useFetch from "./useFetch";
 import { Wrapper } from "./Wrapper";
-
-const getProfile = async (username = DEFAULT.USERNAME) => {
-  const response = await fetch(`${DEFAULT.API_BASE_URL}${username}`);
-  const result = await response.json();
-  return result;
-};
 
 const getTheme = () => {
   if (
@@ -25,11 +19,11 @@ const getTheme = () => {
 };
 
 const App = () => {
-  const [data, setData] = useState(DEFAULT.CONTEXT);
-
   const [theme, setTheme] = useState(getTheme());
 
-  const [query, setQuery] = useState({ query: DEFAULT.QUERY, error: false });
+  const [query, setQuery] = useState(DEFAULT.QUERY);
+
+  const [data, status] = useFetch(query === DEFAULT.QUERY ? DEFAULT.USERNAME : query);
 
   const updateTheme = () => {
     if (theme === "dark") {
@@ -45,91 +39,11 @@ const App = () => {
     }
   };
 
-  useEffect(() => {
-    if (query.query !== DEFAULT.QUERY) {
-      getProfile(query.query)
-        .then((res) => {
-          // if a successful query but error on find
-          if (res.message) {
-            // setQuery({ query: query.query, error: true });
-            return;
-          }
-
-          setData(
-            (({
-              avatar_url,
-              name,
-              created_at,
-              login,
-              bio,
-              public_repos,
-              followers,
-              following,
-              location,
-              twitter_username,
-              blog,
-              company,
-            }) => ({
-              avatar_url,
-              name,
-              created_at,
-              login,
-              bio,
-              public_repos,
-              followers,
-              following,
-              location,
-              twitter_username,
-              blog,
-              company,
-            }))(res)
-          );
-        })
-        .catch(() => setQuery({ query: query.query, error: true }));
-    }
-  }, [query.query]);
-
-  useEffect(() => {
-    getProfile()
-      .then((res) => {
-        setData(
-          (({
-            avatar_url,
-            name,
-            created_at,
-            login,
-            bio,
-            public_repos,
-            followers,
-            following,
-            location,
-            twitter_username,
-            blog,
-            company,
-          }) => ({
-            avatar_url,
-            name,
-            created_at,
-            login,
-            bio,
-            public_repos,
-            followers,
-            following,
-            location,
-            twitter_username,
-            blog,
-            company,
-          }))(res)
-        );
-      })
-      .catch((e) => console.error(`cannot fetch default profile : ${e}`));
-  }, []);
-
   return (
     <ThemeContext.Provider value={{ theme, updateTheme }}>
       <div className={`App flex justify-center items-center font-space bg-primary-500 dark:bg-primary-700`}>
         <Context.Provider value={{ data }}>
-          <QueryContext.Provider value={{ query, setQuery }}>
+          <QueryContext.Provider value={{ query, setQuery, status }}>
             <Wrapper>
               <Header />
               <Main />
